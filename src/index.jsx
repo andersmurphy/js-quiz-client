@@ -1,15 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Router, Route, hashHistory} from 'react-router'
+import App from './components/App'
 import Question from './components/Question'
-import {Map} from 'immutable'
+import Start from './components/Start'
+import Finish from './components/Finish'
 
-
-const question = {
-  question: 'question1',
-  answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
-}
+const routes = <Route component={App}>
+  <Route path="/" component={Question} />
+  <Route path="quiz" component={Start} />
+  <Route path="results" componet={Finish} />
+</Route>
 
 ReactDOM.render(
-  <Question question={question} />,
+  <Router history={hashHistory}>{routes}</Router>,
   document.getElementById('app')
 )

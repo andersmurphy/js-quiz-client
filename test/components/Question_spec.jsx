@@ -7,14 +7,15 @@ import {
 } from 'react-addons-test-utils'
 import Question from '../../src/components/Question'
 import {expect} from 'chai'
+import {Map} from 'immutable'
 
 describe('Question', () => {
 
   it('renders a question', () => {
-    const question = {
+    const question = Map({
       question: 'question1',
-      answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
-    }
+      answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+    })
     const component = renderIntoDocument(
       <Question question={question} />
     )
@@ -26,10 +27,10 @@ describe('Question', () => {
   })
 
   it('renders answers', () => {
-    const question = {
+    const question = Map({
       question: 'question1',
-      answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
-    }
+      answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+    })
     const component = renderIntoDocument(
       <Question question={question} />
     )
@@ -46,10 +47,10 @@ describe('Question', () => {
   it('invokes callback when next radio button is selected', () => {
     let selectedAnswer
     const selectAnswer = (answer) => selectedAnswer = answer
-    const question = {
+    const question = Map({
       question: 'question1',
-      answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
-    }
+      answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+    })
     const component = renderIntoDocument(
       <Question question={question}
                 selectAnswer={selectAnswer}/>
@@ -62,10 +63,11 @@ describe('Question', () => {
   })
 
   it('selectedAnswer radio button is checked', () => {
-    const question = {
+    const question = Map({
       question: 'question1',
-      answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
-    }
+      answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+    })
+
     const component = renderIntoDocument(
       <Question question={question}
                 selectedAnswer='answerC'/>
@@ -80,10 +82,10 @@ describe('Question', () => {
   })
 
   it('renders next button', () => {
-    const question = {
+    const question = Map({
       question: 'question1',
-      answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
-    }
+      answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+    })
     const component = renderIntoDocument(
       <Question question={question} />
     )

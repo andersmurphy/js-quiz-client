@@ -1,13 +1,14 @@
 import React from 'react'
+import {Map} from 'immutable'
 
 export default class Question extends React.PureComponent {
   getAnswers() {
-    return Object.keys(this.props.question.answers) || []
+    return this.props.question.get('answers').keySeq() || []
   }
 
   render() {
     return <div className="question">
-      <h1>{this.props.question.question}</h1>
+      <h1>{this.props.question.get('question')}</h1>
       {this.getAnswers().map(answer =>
         <div className="radio" key={answer}>
           <input type="radio" value={answer}
