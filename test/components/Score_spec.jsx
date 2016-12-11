@@ -6,13 +6,13 @@ import {
 } from 'react-addons-test-utils'
 import Score from '../../src/components/Score'
 import {expect} from 'chai'
+import {Map} from 'immutable'
+
 
 describe('Score', () => {
 
   it('renders score', () => {
-    const score = {
-      total_score: 25
-    }
+    const score = Map({total_score: 25})
     const component = renderIntoDocument(
       <Score score={score} />
     )
