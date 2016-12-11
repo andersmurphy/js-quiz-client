@@ -14,9 +14,11 @@ describe('Finish', () => {
   it('renders thank you message', () => {
     const totalScore = Map({total_score: 25})
     const maxScore = Map({max_score: 100})
+    const name = Map({name: 'john'})
     const component = renderIntoDocument(
       <Finish totalScore={totalScore}
-              maxScore={maxScore}/>
+              maxScore={maxScore}
+              name={name}/>
     )
 
     const headers = scryRenderedDOMComponentsWithTag(component, 'h1')
@@ -28,9 +30,11 @@ describe('Finish', () => {
   it('renders overal score', () => {
     const totalScore = Map({total_score: 25})
     const maxScore = Map({max_score: 100})
+    const name = Map({name: 'john'})
     const component = renderIntoDocument(
       <Finish totalScore={totalScore}
-              maxScore={maxScore}/>
+              maxScore={maxScore}
+              name={name}/>
     )
 
     const paragraphs = scryRenderedDOMComponentsWithTag(component, 'p')
@@ -42,9 +46,11 @@ describe('Finish', () => {
   it('renders try again', () => {
     const totalScore = Map({total_score: 25})
     const maxScore = Map({max_score: 100})
+    const name = Map({name: 'john'})
     const component = renderIntoDocument(
       <Finish totalScore={totalScore}
-              maxScore={maxScore}/>
+              maxScore={maxScore}
+              name={name}/>
     )
 
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')

@@ -9,7 +9,7 @@ import Finish from './components/Finish'
 const routes = <Route component={App}>
   <Route path="/" component={Question} />
   <Route path="quiz" component={Start} />
-  <Route path="results" componet={Finish} />
+  <Route path="results" component={Finish} />
 </Route>
 
 ReactDOM.render(

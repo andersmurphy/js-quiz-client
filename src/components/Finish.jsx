@@ -1,10 +1,11 @@
 import React from 'react'
+import {Map} from 'immutable'
 
 export default class Finish extends React.PureComponent {
   render() {
     return <div className="finish">
-      <h1>Thank you john!</h1>
-      <p>You scored {this.props.totalScore} points out of a possible {this.props.maxScore} in our cash flow quiz</p>
+      <h1>Thank you {this.props.name.get('name')}!</h1>
+      <p>You scored {this.props.totalScore.get('total_score')} points out of a possible {this.props.maxScore.get('max_score')} in our cash flow quiz</p>
       <button ref="next"
               className="next">
               Try Again
