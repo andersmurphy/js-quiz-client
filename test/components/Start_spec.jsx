@@ -25,10 +25,10 @@ describe('Start', () => {
         <Start />
       )
 
-      const headers = scryRenderedDOMComponentsWithTag(component, 'h2')
+      const paragraphs = scryRenderedDOMComponentsWithTag(component, 'p')
 
-      expect(headers.length).to.equal(1)
-      expect(headers[0].textContent).to.equal('What is your name?')
+      expect(paragraphs.length).to.equal(1)
+      expect(paragraphs[0].textContent).to.equal('What is your name?')
   })
 
   it('renders text field', () => {

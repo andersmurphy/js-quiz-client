@@ -33,10 +33,10 @@ describe('Finish', () => {
       <Finish state={state}/>
     )
 
-    const headers = scryRenderedDOMComponentsWithTag(component, 'h2')
+    const paragraphs = scryRenderedDOMComponentsWithTag(component, 'p')
 
-    expect(headers.length).to.equal(1)
-    expect(headers[0].textContent).to.equal('You scored 25 points out of a possible 100 in our cash flow quiz')
+    expect(paragraphs.length).to.equal(1)
+    expect(paragraphs[0].textContent).to.equal('You scored 25 points out of a possible 100 in our cash flow quiz')
   })
 
   it('renders try again', () => {
