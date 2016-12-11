@@ -1,9 +1,10 @@
 import React from 'react'
+import {Map} from 'immutable'
 
 export default class Score extends React.PureComponent {
   render() {
     return <div className="score">
-      <h1>Points so far: {this.props.score.get('total_score')}</h1>
+      <p>Points so far: {this.props.totalScore.get('total_score')}</p>
     </div>
   }
 }

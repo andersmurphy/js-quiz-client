@@ -1,6 +1,7 @@
 import React from 'react'
 import {Map, List} from 'immutable'
 import Finish from './Finish'
+import Score from './Score'
 
 export default class Question extends React.PureComponent {
   getAnswers() {
@@ -14,6 +15,7 @@ export default class Question extends React.PureComponent {
       maxScore={this.props.maxScore}
       name={this.props.name}/> :
     <div className="question">
+      <Score totalScore={this.props.totalScore}/>
       <h1>{this.props.question.get('question')}</h1>
       {this.getAnswers().map(answer =>
         <div className="radio" key={answer}>
