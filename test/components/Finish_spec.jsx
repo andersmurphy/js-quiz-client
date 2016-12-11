@@ -6,31 +6,31 @@ import {
 } from 'react-addons-test-utils'
 import Finish from '../../src/components/Finish'
 import {expect} from 'chai'
+import {Map} from 'immutable'
+
 
 describe('Finish', () => {
 
   it('renders thank you message', () => {
-      const state = {
-        total_score: 25,
-        max_score: 100
-      }
-      const component = renderIntoDocument(
-        <Finish state={state} />
-      )
+    const totalScore = Map({total_score: 25})
+    const maxScore = Map({max_score: 100})
+    const component = renderIntoDocument(
+      <Finish totalScore={totalScore}
+              maxScore={maxScore}/>
+    )
 
-      const headers = scryRenderedDOMComponentsWithTag(component, 'h1')
+    const headers = scryRenderedDOMComponentsWithTag(component, 'h1')
 
-      expect(headers.length).to.equal(1)
-      expect(headers[0].textContent).to.equal('Thank you john!')
+    expect(headers.length).to.equal(1)
+    expect(headers[0].textContent).to.equal('Thank you john!')
   })
 
   it('renders overal score', () => {
-    const state = {
-      total_score: 25,
-      max_score: 100
-    }
+    const totalScore = Map({total_score: 25})
+    const maxScore = Map({max_score: 100})
     const component = renderIntoDocument(
-      <Finish state={state}/>
+      <Finish totalScore={totalScore}
+              maxScore={maxScore}/>
     )
 
     const paragraphs = scryRenderedDOMComponentsWithTag(component, 'p')
@@ -40,12 +40,11 @@ describe('Finish', () => {
   })
 
   it('renders try again', () => {
-    const state = {
-      total_score: 25,
-      max_score: 100
-    }
+    const totalScore = Map({total_score: 25})
+    const maxScore = Map({max_score: 100})
     const component = renderIntoDocument(
-      <Finish state={state}/>
+      <Finish totalScore={totalScore}
+              maxScore={maxScore}/>
     )
 
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')

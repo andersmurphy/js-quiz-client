@@ -4,7 +4,7 @@ export default class Finish extends React.PureComponent {
   render() {
     return <div className="finish">
       <h1>Thank you john!</h1>
-      <p>You scored {this.props.state.total_score} points out of a possible {this.props.state.max_score} in our cash flow quiz</p>
+      <p>You scored {this.props.totalScore} points out of a possible {this.props.maxScore} in our cash flow quiz</p>
       <button ref="next"
               className="next">
               Try Again
