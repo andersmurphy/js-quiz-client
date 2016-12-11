@@ -136,10 +136,10 @@ describe('Question', () => {
                 name={name}/>
     )
 
-    const finish = ReactDOM.findDOMNode(component.refs.finish);
+    const finish = ReactDOM.findDOMNode(component.refs.finish)
     expect(finish).to.be.ok;
-    expect(finish.textContent).to.contain('john');
-    expect(finish.textContent).to.contain('100');
-    expect(finish.textContent).to.contain('25');
+    expect(finish.textContent).to.contain('john')
+    expect(finish.textContent).to.contain('100')
+    expect(finish.textContent).to.contain('25')
   })
 })
