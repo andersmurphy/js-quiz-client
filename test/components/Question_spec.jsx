@@ -96,4 +96,39 @@ describe('Question', () => {
     expect(buttons[0].textContent).to.equal('Next')
   })
 
+  it('invokes the next callback when next button is clicked', () => {
+    let nextInvoked = false
+    const next = () => nextInvoked = true
+    const question = Map({
+      question: 'question1',
+      answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+    })
+    const component = renderIntoDocument(
+      <Question question={question}
+                next={next}/>
+    )
+
+    Simulate.click(ReactDOM.findDOMNode(component.refs.next))
+
+    expect(nextInvoked).to.equal(true)
+  })
+
+  it('renders finish page when there are no more questions left', () => {
+    const question = Map()
+    const totalScore = Map({total_score: 25})
+    const maxScore = Map({max_score: 100})
+    const name = Map({name: 'john'})
+    const component = renderIntoDocument(
+      <Question question={question}
+                totalScore={totalScore}
+                maxScore={maxScore}
+                name={name}/>
+    )
+
+    const finish = ReactDOM.findDOMNode(component.refs.finish);
+    expect(finish).to.be.ok;
+    expect(finish.textContent).to.contain('john');
+    expect(finish.textContent).to.contain('100');
+    expect(finish.textContent).to.contain('25');
+  })
 })

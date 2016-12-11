@@ -1,13 +1,19 @@
 import React from 'react'
-import {Map} from 'immutable'
+import {Map, List} from 'immutable'
+import Finish from './Finish'
 
 export default class Question extends React.PureComponent {
   getAnswers() {
-    return this.props.question.get('answers').keySeq() || []
+    return (this.props.question.get('answers') || List()).keySeq()
   }
 
   render() {
-    return <div className="question">
+    return this.getAnswers().isEmpty() ?
+    <Finish ref="finish"
+      totalScore={this.props.totalScore}
+      maxScore={this.props.maxScore}
+      name={this.props.name}/> :
+    <div className="question">
       <h1>{this.props.question.get('question')}</h1>
       {this.getAnswers().map(answer =>
         <div className="radio" key={answer}>
@@ -18,7 +24,8 @@ export default class Question extends React.PureComponent {
         </div>
       )}
       <button ref="next"
-              className="next">
+              className="next"
+              onClick={this.props.next}>
               Next
       </button>
     </div>
