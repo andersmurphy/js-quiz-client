@@ -1,28 +1,21 @@
 import React from 'react'
 
 export default class Question extends React.PureComponent {
+  getAnswers() {
+    return Object.keys(this.props.question.answers) || []
+  }
 
   render() {
     return <div className="question">
       <h1>{this.props.question.question}</h1>
-      <div>
-        <input id="answer-1" name="answer" type="radio" value="answerA" />
-        <label htmlFor="answer-1">{Object.keys(this.props.question.answers)[0]}</label>
-      </div>
-      <div>
-        <input id="answer-2" name="answer" type="radio" value="answerB" />
-        <label htmlFor="answer-2">{Object.keys(this.props.question.answers)[1]}</label>
-      </div>
-      <div>
-        <input id="answer-3" name="answer" type="radio" value="answerC" />
-        <label htmlFor="answer-3">{Object.keys(this.props.question.answers)[2]}</label>
-      </div>
-
-      <div>
-        <input id="answer-4" name="answer" type="radio" value="answerD" />
-        <label htmlFor="answer-4">{Object.keys(this.props.question.answers)[3]}</label>
-      </div>
-
+      {this.getAnswers().map(answer =>
+        <div className="radio" key={answer}>
+          <input type="radio" value={answer}
+            onChange={() => this.props.selectAnswer(answer)}
+            checked={this.props.selectedAnswer === answer ? true : false}/>
+          <label htmlFor={answer}>{answer}</label>
+        </div>
+      )}
       <button ref="next"
               className="next">
               Next
