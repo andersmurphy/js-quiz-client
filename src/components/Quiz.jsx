@@ -12,7 +12,8 @@ export class Quiz extends React.PureComponent {
       return <Finish ref="finish"
         totalScore={this.props.totalScore}
         maxScore={this.props.maxScore}
-        name={this.props.name}/>
+        name={this.props.name}
+        tryAgain={this.props.tryAgain}/>
     } else {
       if(this.props.currentQuestion && this.props.name) {
         return  <Question ref="question"

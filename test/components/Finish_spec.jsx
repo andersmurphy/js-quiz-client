@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {
   renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
+  scryRenderedDOMComponentsWithTag,
+  Simulate
 } from 'react-addons-test-utils'
 import Finish from '../../src/components/Finish'
 import {expect} from 'chai'
@@ -61,6 +62,18 @@ describe('Finish', () => {
     const component = renderIntoDocument(
       <Finish />
     )
+  })
+
+  it('invokes the tryAgain callback when tryAgain button is clicked', () => {
+    let tryAgainInvoked = false
+    const tryAgain = () => tryAgainInvoked = true
+    const component = renderIntoDocument(
+      <Finish tryAgain={tryAgain}/>
+    )
+
+    Simulate.click(ReactDOM.findDOMNode(component.refs.tryAgain))
+
+    expect(tryAgainInvoked).to.equal(true)
   })
 
 })

@@ -5,8 +5,9 @@ export default class Finish extends React.PureComponent {
     return <div className="finish">
       <h1>Thank you {this.props.name}!</h1>
       <p>You scored {this.props.totalScore} points out of a possible {this.props.maxScore} in our cash flow quiz</p>
-      <button ref="next"
-              className="next">
+      <button ref="tryAgain"
+              className="tryAgain"
+              onClick={this.props.tryAgain}>
               Try Again
       </button>
     </div>

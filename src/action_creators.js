@@ -27,3 +27,10 @@ export const selectAnswer = (answer) => {
     answer
   }
 }
+
+export const tryAgain = () => {
+  return {
+    meta: {remote: true},
+    type: 'TRY_AGAIN',
+  }
+}
