@@ -4,13 +4,13 @@ import Score from './Score'
 
 export default class Question extends React.PureComponent {
   getAnswers() {
-    return ((this.props.question && this.props.question.get('answers'))
+    return ((this.props.currentQuestion && this.props.currentQuestion.get('answers'))
             || List())
             .keySeq()
   }
 
   getQuestion() {
-    return ((this.props.question && this.props.question.get('question'))
+    return ((this.props.currentQuestion && this.props.currentQuestion.get('question'))
             || '')
   }
 

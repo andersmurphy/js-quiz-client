@@ -8,9 +8,9 @@ import Question from './Question'
 export class Quiz extends React.PureComponent {
   render() {
     if(this.props.name) {
-      if(this.props.question) {
+      if(this.props.currentQuestion) {
         return  <Question ref="question"
-          question={this.props.question}
+          currentQuestion={this.props.currentQuestion}
           totalScore={this.props.totalScore}
           next={this.props.next}/>
       } else {
@@ -29,7 +29,7 @@ export class Quiz extends React.PureComponent {
 
 function mapStateToProps(state) {
   return {
-    question: state.get('current_question'),
+    currentQuestion: state.get('current_question'),
     totalScore: state.get('total_score'),
     maxScore: state.get('max_score'),
     name: state.get('name')

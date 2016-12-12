@@ -12,12 +12,12 @@ import {Map} from 'immutable'
 describe('Question', () => {
 
   it('renders a question', () => {
-    const question = Map({
+    const currentQuestion = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
-      <Question question={question}/>
+      <Question currentQuestion={currentQuestion}/>
     )
 
     const headers = scryRenderedDOMComponentsWithTag(component, 'h3')
@@ -27,12 +27,12 @@ describe('Question', () => {
   })
 
   it('renders answers', () => {
-    const question = Map({
+    const currentQuestion = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
-      <Question question={question}/>
+      <Question currentQuestion={currentQuestion}/>
     )
 
     const radioButtons = scryRenderedDOMComponentsWithTag(component, 'label')
@@ -47,12 +47,12 @@ describe('Question', () => {
   it('invokes callback when next radio button is selected', () => {
     let selectedAnswer
     const selectAnswer = (answer) => selectedAnswer = answer
-    const question = Map({
+    const currentQuestion = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
-      <Question question={question}
+      <Question currentQuestion={currentQuestion}
                 selectAnswer={selectAnswer}/>
     )
 
@@ -63,12 +63,12 @@ describe('Question', () => {
   })
 
   it('selectedAnswer radio button is checked', () => {
-    const question = Map({
+    const currentQuestion = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
-      <Question question={question}
+      <Question currentQuestion={currentQuestion}
                 selectedAnswer='answerC'/>
     )
 
@@ -81,12 +81,12 @@ describe('Question', () => {
   })
 
   it('renders next button', () => {
-    const question = Map({
+    const currentQuestion = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
-      <Question question={question}/>
+      <Question currentQuestion={currentQuestion}/>
     )
 
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
@@ -98,12 +98,12 @@ describe('Question', () => {
   it('invokes the next callback when next button is clicked', () => {
     let nextInvoked = false
     const next = () => nextInvoked = true
-    const question = Map({
+    const currentQuestion = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
-      <Question question={question}
+      <Question currentQuestion={currentQuestion}
                 next={next}/>
     )
 
