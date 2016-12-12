@@ -1,26 +1,23 @@
 import React from 'react'
 import {Map, List} from 'immutable'
-import {connect} from 'react-redux'
-import Finish from './Finish'
 import Score from './Score'
-import * as actionCreators from '../action_creators'
 
-export class Question extends React.PureComponent {
+export default class Question extends React.PureComponent {
   getAnswers() {
     return ((this.props.question && this.props.question.get('answers'))
             || List())
             .keySeq()
   }
 
+  getQuestion() {
+    return ((this.props.question && this.props.question.get('question'))
+            || '')
+  }
+
   render() {
-    return this.getAnswers().isEmpty() ?
-    <Finish ref="finish"
-      totalScore={this.props.totalScore}
-      maxScore={this.props.maxScore}
-      name={this.props.name}/> :
-    <div className="question">
+    return <div className="question">
       <Score totalScore={this.props.totalScore}/>
-      <h3>{this.props.question.get('question')}</h3>
+      <h3>{this.getQuestion()}</h3>
       {this.getAnswers().map(answer =>
         <div className="radio" key={answer}>
           <input type="radio" value={answer}
@@ -37,17 +34,3 @@ export class Question extends React.PureComponent {
     </div>
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    question: state.get('current_question'),
-    totalScore: state.get('total_score'),
-    maxScore: state.get('max_score'),
-    name: state.get('name')
-  };
-}
-
-export const QuestionContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(Question)

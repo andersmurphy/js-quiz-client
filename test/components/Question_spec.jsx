@@ -5,7 +5,7 @@ import {
   scryRenderedDOMComponentsWithTag,
   Simulate
 } from 'react-addons-test-utils'
-import {Question} from '../../src/components/Question'
+import Question from '../../src/components/Question'
 import {expect} from 'chai'
 import {Map} from 'immutable'
 
@@ -110,25 +110,6 @@ describe('Question', () => {
     Simulate.click(ReactDOM.findDOMNode(component.refs.next))
 
     expect(nextInvoked).to.equal(true)
-  })
-
-  it('renders finish page when there are no more questions left', () => {
-    const question = Map()
-    const totalScore = 25
-    const maxScore = 100
-    const name = 'john'
-    const component = renderIntoDocument(
-      <Question question={question}
-                totalScore={totalScore}
-                maxScore={maxScore}
-                name={name}/>
-    )
-
-    const finish = ReactDOM.findDOMNode(component.refs.finish)
-    expect(finish).to.be.ok;
-    expect(finish.textContent).to.contain('john')
-    expect(finish.textContent).to.contain('100')
-    expect(finish.textContent).to.contain('25')
   })
 
   it('handles missing props', () => {

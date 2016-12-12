@@ -7,7 +7,7 @@ import {Map, List} from 'immutable'
 import {Provider} from 'react-redux'
 import io from 'socket.io-client'
 import App from './components/App'
-import {QuestionContainer} from './components/Question'
+import {QuizContainer} from './components/Quiz'
 import Start from './components/Start'
 import Finish from './components/Finish'
 import {setState} from './action_creators'
@@ -24,7 +24,7 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducer)
 
 const routes = <Route component={App}>
-  <Route path="/" component={QuestionContainer} />
+  <Route path="/" component={QuizContainer} />
   <Route path="quiz" component={Start} />
   <Route path="results" component={Finish} />
 </Route>
