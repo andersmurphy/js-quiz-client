@@ -6,14 +6,26 @@ import {
 } from 'react-addons-test-utils'
 import {Quiz} from '../../src/components/Quiz'
 import {expect} from 'chai'
-import {Map} from 'immutable'
+import {Map, List} from 'immutable'
 
 describe('Quiz', () => {
 
 
-    it('renders start component when there is no name set', () => {
+    it('renders start component when there is no name set and no currentQuestion', () => {
+      const questions = List.of(
+        Map({
+          question: 'question1',
+          answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+          })
+        }),
+        Map({
+          question: 'question2',
+          answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+          })
+        })
+      )
       const component = renderIntoDocument(
-        <Quiz />
+        <Quiz questions={questions}/>
       )
 
       const startComponent = ReactDOM.findDOMNode(component.refs.start)
@@ -22,8 +34,20 @@ describe('Quiz', () => {
       expect(startComponent.textContent).to.contain('What is your name?')
     })
 
-    it('renders question component when name is set and questions are there', () => {
-      const question = Map({
+    it('renders question component when name is set and currentQuestion is set', () => {
+      const questions = List.of(
+        Map({
+          question: 'question1',
+          answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+          })
+        }),
+        Map({
+          question: 'question2',
+          answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+          })
+        })
+      )
+      const currenQuestion = Map({
         question: 'question1',
         answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
       })
@@ -31,7 +55,8 @@ describe('Quiz', () => {
       const maxScore = 100
       const name = 'john'
       const component = renderIntoDocument(
-        <Quiz question={question}
+        <Quiz questions={questions}
+                  currentQuestion={currenQuestion}
                   totalScore={totalScore}
                   maxScore={maxScore}
                   name={name}/>
@@ -41,12 +66,14 @@ describe('Quiz', () => {
       expect(questionComponent).to.be.ok
     })
 
-    it('renders finish component when there are no more questions left', () => {
+    it('renders finish component when there are no more questions is empty', () => {
+      const questions = Map()
       const totalScore = 25
       const maxScore = 100
       const name = 'john'
       const component = renderIntoDocument(
-        <Quiz totalScore={totalScore}
+        <Quiz questions={questions}
+                  totalScore={totalScore}
                   maxScore={maxScore}
                   name={name}/>
       )
