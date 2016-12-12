@@ -7,7 +7,8 @@ export default class Start extends React.PureComponent {
       <p>What is your name?</p>
       <textarea></textarea>
       <button ref="next"
-              className="next">
+              className="next"
+              onClick={this.props.next}>
               Next
       </button>
     </div>

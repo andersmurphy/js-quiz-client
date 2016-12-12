@@ -11,7 +11,8 @@ export class Quiz extends React.PureComponent {
       if(this.props.question) {
         return  <Question ref="question"
           question={this.props.question}
-          totalScore={this.props.totalScore}/>
+          totalScore={this.props.totalScore}
+          next={this.props.next}/>
       } else {
         return <Finish ref="finish"
           totalScore={this.props.totalScore}
@@ -19,7 +20,8 @@ export class Quiz extends React.PureComponent {
           name={this.props.name}/>
       }
     } else {
-      return <Start ref="start" />
+      return <Start ref="start"
+                    next={this.props.next}/>
     }
   }
 }

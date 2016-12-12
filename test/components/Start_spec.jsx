@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {
   renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
+  scryRenderedDOMComponentsWithTag,
+  Simulate
 } from 'react-addons-test-utils'
 import Start from '../../src/components/Start'
 import {expect} from 'chai'
@@ -51,6 +52,18 @@ describe('Start', () => {
 
     expect(buttons.length).to.equal(1)
     expect(buttons[0].textContent).to.equal('Next')
+  })
+
+  it('invokes the next callback when next button is clicked', () => {
+    let nextInvoked = false
+    const next = () => nextInvoked = true
+    const component = renderIntoDocument(
+      <Start next={next}/>
+    )
+
+    Simulate.click(ReactDOM.findDOMNode(component.refs.next))
+
+    expect(nextInvoked).to.equal(true)
   })
 
 })
