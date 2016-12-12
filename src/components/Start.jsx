@@ -1,6 +1,11 @@
 import React from 'react'
 
 export default class Start extends React.PureComponent {
+
+  isNextDisabled() {
+    return this.props.name === ''
+  }
+
   render() {
     return <div className="start">
       <h3>Welcome to the Cash Flow Quiz!</h3>
@@ -9,6 +14,7 @@ export default class Start extends React.PureComponent {
       <div>
         <button ref="next"
                 className="next"
+                disabled={this.isNextDisabled()}
                 onClick={this.props.next}>
                 Next
         </button>

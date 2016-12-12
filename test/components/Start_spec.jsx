@@ -78,4 +78,25 @@ describe('Start', () => {
     expect(setNameInvoked).to.equal(true)
   })
 
+  it('disables next button if name is an empty string', () =>  {
+    const name = ''
+    const component = renderIntoDocument(
+      <Start name={name}/>
+    )
+
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
+
+    expect(buttons[0].hasAttribute('disabled')).to.equal(true);
+  })
+
+  it('enables next button if name is not empty string', () =>  {
+    const name = 'Anders'
+    const component = renderIntoDocument(
+      <Start name={name}/>
+    )
+
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
+
+    expect(buttons[0].hasAttribute('disabled')).to.equal(false);
+  })
 })
