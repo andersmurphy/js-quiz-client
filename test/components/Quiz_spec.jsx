@@ -11,7 +11,7 @@ import {Map, List} from 'immutable'
 describe('Quiz', () => {
 
 
-    it('renders start component when there is no name set and no currentQuestion', () => {
+    it('renders start component when currentQuestion is empty', () => {
       const questions = List.of(
         Map({
           question: 'question1',
@@ -34,7 +34,7 @@ describe('Quiz', () => {
       expect(startComponent.textContent).to.contain('What is your name?')
     })
 
-    it('renders question component when name is set and currentQuestion is set', () => {
+    it('renders question component when currentQuestion is not empty', () => {
       const questions = List.of(
         Map({
           question: 'question1',
@@ -53,7 +53,6 @@ describe('Quiz', () => {
       })
       const totalScore = 25
       const maxScore = 100
-      const name = 'john'
       const component = renderIntoDocument(
         <Quiz questions={questions}
                   currentQuestion={currentQuestion}

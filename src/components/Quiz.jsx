@@ -14,20 +14,19 @@ export class Quiz extends React.PureComponent {
         maxScore={this.props.maxScore}
         name={this.props.name}
         tryAgain={this.props.tryAgain}/>
+    } else if(this.props.currentQuestion && !this.props.currentQuestion.isEmpty()) {
+      return  <Question ref="question"
+        currentQuestion={this.props.currentQuestion}
+        totalScore={this.props.totalScore}
+        next={this.props.next}
+        selectAnswer={this.props.selectAnswer}
+        selectedAnswer={this.props.selectedAnswer}/>
     } else {
-      if(this.props.currentQuestion && this.props.name) {
-        return  <Question ref="question"
-          currentQuestion={this.props.currentQuestion}
-          totalScore={this.props.totalScore}
-          next={this.props.next}
-          selectAnswer={this.props.selectAnswer}
-          selectedAnswer={this.props.selectedAnswer}/>
-      } else {
-        return <Start ref="start"
-          next={this.props.next}
-          setName={this.props.setName}/>
-      }
+      return <Start ref="start"
+        next={this.props.next}
+        setName={this.props.setName}/>
     }
+
   }
 }
 
