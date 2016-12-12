@@ -37,10 +37,10 @@ describe('Start', () => {
       <Start />
     )
 
-    const textarea = scryRenderedDOMComponentsWithTag(component, 'textarea')
+    const input = scryRenderedDOMComponentsWithTag(component, 'input')
 
-    expect(textarea.length).to.equal(1)
-    expect(textarea[0].textContent).to.equal('')
+    expect(input.length).to.equal(1)
+    expect(input[0].textContent).to.equal('')
   })
 
   it('renders next button', () => {
@@ -64,6 +64,18 @@ describe('Start', () => {
     Simulate.click(ReactDOM.findDOMNode(component.refs.next))
 
     expect(nextInvoked).to.equal(true)
+  })
+
+  it('invokes the setName callback when setName input changes', () => {
+    let setNameInvoked = false
+    const setName = () => setNameInvoked = true
+    const component = renderIntoDocument(
+      <Start setName={setName}/>
+    )
+
+    Simulate.change(ReactDOM.findDOMNode(component.refs.setName))
+
+    expect(setNameInvoked).to.equal(true)
   })
 
 })

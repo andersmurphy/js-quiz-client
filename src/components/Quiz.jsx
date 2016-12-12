@@ -21,7 +21,8 @@ export class Quiz extends React.PureComponent {
       }
     } else {
       return <Start ref="start"
-                    next={this.props.next}/>
+                    next={this.props.next}
+                    setName={this.props.setName}/>
     }
   }
 }
