@@ -25,8 +25,6 @@ const store = createStoreWithMiddleware(reducer)
 
 const routes = <Route component={App}>
   <Route path="/" component={QuizContainer} />
-  <Route path="quiz" component={Start} />
-  <Route path="results" component={Finish} />
 </Route>
 
 ReactDOM.render(
