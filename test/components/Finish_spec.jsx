@@ -58,4 +58,10 @@ describe('Finish', () => {
     expect(buttons.length).to.equal(1)
     expect(buttons[0].textContent).to.equal('Try Again')
   })
+
+  it('handles missing props', () => {
+    const component = renderIntoDocument(
+      <Finish />
+    )
+  })
 })

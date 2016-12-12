@@ -16,10 +16,8 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const totalScore = Map({total_score: 25})
     const component = renderIntoDocument(
-      <Question question={question}
-                totalScore={totalScore}/>
+      <Question question={question}/>
     )
 
     const headers = scryRenderedDOMComponentsWithTag(component, 'h1')
@@ -33,10 +31,8 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const totalScore = Map({total_score: 25})
     const component = renderIntoDocument(
-      <Question question={question}
-                totalScore={totalScore}/>
+      <Question question={question}/>
     )
 
     const radioButtons = scryRenderedDOMComponentsWithTag(component, 'label')
@@ -55,11 +51,9 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const totalScore = Map({total_score: 25})
     const component = renderIntoDocument(
       <Question question={question}
-                selectAnswer={selectAnswer}
-                totalScore={totalScore}/>
+                selectAnswer={selectAnswer}/>
     )
 
     const input = scryRenderedDOMComponentsWithTag(component, 'input')
@@ -73,11 +67,9 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const totalScore = Map({total_score: 25})
     const component = renderIntoDocument(
       <Question question={question}
-                selectedAnswer='answerC'
-                totalScore={totalScore}/>
+                selectedAnswer='answerC'/>
     )
 
     const input = scryRenderedDOMComponentsWithTag(component, 'input')
@@ -93,10 +85,8 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const totalScore = Map({total_score: 25})
     const component = renderIntoDocument(
-      <Question question={question}
-                totalScore={totalScore}/>
+      <Question question={question}/>
     )
 
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
@@ -108,14 +98,12 @@ describe('Question', () => {
   it('invokes the next callback when next button is clicked', () => {
     let nextInvoked = false
     const next = () => nextInvoked = true
-    const totalScore = Map({total_score: 25})
     const question = Map({
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
     const component = renderIntoDocument(
       <Question question={question}
-                totalScore={totalScore}
                 next={next}/>
     )
 
@@ -141,5 +129,11 @@ describe('Question', () => {
     expect(finish.textContent).to.contain('john')
     expect(finish.textContent).to.contain('100')
     expect(finish.textContent).to.contain('25')
+  })
+
+  it('handles missing props', () => {
+    const component = renderIntoDocument(
+      <Question />
+    )
   })
 })

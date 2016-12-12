@@ -23,4 +23,10 @@ describe('Score', () => {
     expect(headers[0].textContent).to.equal('Points so far: 25')
   })
 
+  it('handles missing props', () => {
+    const component = renderIntoDocument(
+      <Score />
+    )
+  })
+
 })

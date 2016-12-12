@@ -5,7 +5,9 @@ import Score from './Score'
 
 export default class Question extends React.PureComponent {
   getAnswers() {
-    return (this.props.question.get('answers') || List()).keySeq()
+    return ((this.props.question && this.props.question.get('answers'))
+            || List())
+            .keySeq()
   }
 
   render() {
