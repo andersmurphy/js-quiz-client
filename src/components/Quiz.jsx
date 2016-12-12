@@ -12,7 +12,9 @@ export class Quiz extends React.PureComponent {
         return  <Question ref="question"
           currentQuestion={this.props.currentQuestion}
           totalScore={this.props.totalScore}
-          next={this.props.next}/>
+          next={this.props.next}
+          selectAnswer={this.props.selectAnswer}
+          selectedAnswer={this.props.selectedAnswer}/>
       } else {
         return <Start ref="start"
           next={this.props.next}
@@ -33,7 +35,8 @@ function mapStateToProps(state) {
     currentQuestion: state.get('current_question'),
     totalScore: state.get('total_score'),
     maxScore: state.get('max_score'),
-    name: state.get('name')
+    name: state.get('name'),
+    selectedAnswer: state.getIn(['current_question', 'selected_answer'])
   };
 }
 

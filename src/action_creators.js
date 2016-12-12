@@ -19,3 +19,11 @@ export const setName = (name) => {
     name
   }
 }
+
+export const selectAnswer = (answer) => {
+  return {
+    meta: {remote: true},
+    type: 'SELECT_ANSWER',
+    answer
+  }
+}
