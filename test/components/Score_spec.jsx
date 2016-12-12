@@ -12,7 +12,7 @@ import {Map} from 'immutable'
 describe('Score', () => {
 
   it('renders score', () => {
-    const totalScore = Map({total_score: 25})
+    const totalScore = 25
     const component = renderIntoDocument(
       <Score totalScore={totalScore} />
     )

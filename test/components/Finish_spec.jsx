@@ -12,9 +12,9 @@ import {Map} from 'immutable'
 describe('Finish', () => {
 
   it('renders thank you message', () => {
-    const totalScore = Map({total_score: 25})
-    const maxScore = Map({max_score: 100})
-    const name = Map({name: 'john'})
+    const totalScore = 25
+    const maxScore = 100
+    const name = 'john'
     const component = renderIntoDocument(
       <Finish totalScore={totalScore}
               maxScore={maxScore}
@@ -28,9 +28,9 @@ describe('Finish', () => {
   })
 
   it('renders overal score', () => {
-    const totalScore = Map({total_score: 25})
-    const maxScore = Map({max_score: 100})
-    const name = Map({name: 'john'})
+    const totalScore = 25
+    const maxScore = 100
+    const name = 'john'
     const component = renderIntoDocument(
       <Finish totalScore={totalScore}
               maxScore={maxScore}
@@ -44,9 +44,9 @@ describe('Finish', () => {
   })
 
   it('renders try again', () => {
-    const totalScore = Map({total_score: 25})
-    const maxScore = Map({max_score: 100})
-    const name = Map({name: 'john'})
+    const totalScore = 25
+    const maxScore = 100
+    const name = 'john'
     const component = renderIntoDocument(
       <Finish totalScore={totalScore}
               maxScore={maxScore}
@@ -64,4 +64,5 @@ describe('Finish', () => {
       <Finish />
     )
   })
+
 })

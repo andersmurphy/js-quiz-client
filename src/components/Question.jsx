@@ -1,9 +1,10 @@
 import React from 'react'
 import {Map, List} from 'immutable'
+import {connect} from 'react-redux'
 import Finish from './Finish'
 import Score from './Score'
 
-export default class Question extends React.PureComponent {
+export class Question extends React.PureComponent {
   getAnswers() {
     return ((this.props.question && this.props.question.get('answers'))
             || List())
@@ -35,3 +36,14 @@ export default class Question extends React.PureComponent {
     </div>
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    question: state.get('current_question'),
+    totalScore: state.get('total_score'),
+    maxScore: state.get('max_score'),
+    name: state.get('name')
+  };
+}
+
+export const QuestionContainer = connect(mapStateToProps)(Question)

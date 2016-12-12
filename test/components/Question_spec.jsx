@@ -5,7 +5,7 @@ import {
   scryRenderedDOMComponentsWithTag,
   Simulate
 } from 'react-addons-test-utils'
-import Question from '../../src/components/Question'
+import {Question} from '../../src/components/Question'
 import {expect} from 'chai'
 import {Map} from 'immutable'
 
@@ -114,9 +114,9 @@ describe('Question', () => {
 
   it('renders finish page when there are no more questions left', () => {
     const question = Map()
-    const totalScore = Map({total_score: 25})
-    const maxScore = Map({max_score: 100})
-    const name = Map({name: 'john'})
+    const totalScore = 25
+    const maxScore = 100
+    const name = 'john'
     const component = renderIntoDocument(
       <Question question={question}
                 totalScore={totalScore}
