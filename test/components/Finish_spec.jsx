@@ -6,8 +6,6 @@ import {
 } from 'react-addons-test-utils'
 import Finish from '../../src/components/Finish'
 import {expect} from 'chai'
-import {Map} from 'immutable'
-
 
 describe('Finish', () => {
 

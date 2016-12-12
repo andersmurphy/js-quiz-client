@@ -6,7 +6,6 @@ import {
 } from 'react-addons-test-utils'
 import Score from '../../src/components/Score'
 import {expect} from 'chai'
-import {Map} from 'immutable'
 
 
 describe('Score', () => {
