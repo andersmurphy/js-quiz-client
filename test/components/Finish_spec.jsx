@@ -20,7 +20,7 @@ describe('Finish', () => {
               name={name}/>
     )
 
-    const headers = scryRenderedDOMComponentsWithTag(component, 'h1')
+    const headers = scryRenderedDOMComponentsWithTag(component, 'h3')
 
     expect(headers.length).to.equal(1)
     expect(headers[0].textContent).to.equal('Thank you john!')

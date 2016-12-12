@@ -3,7 +3,7 @@ import React from 'react'
 export default class Start extends React.PureComponent {
   render() {
     return <div className="start">
-      <h1>Welcome to the Cash Flow Quiz!</h1>
+      <h3>Welcome to the Cash Flow Quiz!</h3>
       <p>What is your name?</p>
       <input ref="setName" type="text" onChange={(event) => this.props.setName(event.target.value)}/>
       <div>
