@@ -3,6 +3,7 @@ import {Map, List} from 'immutable'
 import {connect} from 'react-redux'
 import Finish from './Finish'
 import Score from './Score'
+import * as actionCreators from '../action_creators'
 
 export class Question extends React.PureComponent {
   getAnswers() {
@@ -19,7 +20,7 @@ export class Question extends React.PureComponent {
       name={this.props.name}/> :
     <div className="question">
       <Score totalScore={this.props.totalScore}/>
-      <h1>{this.props.question.get('question')}</h1>
+      <h3>{this.props.question.get('question')}</h3>
       {this.getAnswers().map(answer =>
         <div className="radio" key={answer}>
           <input type="radio" value={answer}
@@ -46,4 +47,7 @@ function mapStateToProps(state) {
   };
 }
 
-export const QuestionContainer = connect(mapStateToProps)(Question)
+export const QuestionContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(Question)
