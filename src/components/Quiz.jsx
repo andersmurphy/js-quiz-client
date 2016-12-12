@@ -7,7 +7,13 @@ import Question from './Question'
 
 export class Quiz extends React.PureComponent {
   render() {
-    if(this.props.questions && !this.props.questions.isEmpty()) {
+    if(this.props.questions && this.props.questions.isEmpty()
+        &&this.props.currentQuestion && this.props.currentQuestion.isEmpty()) {
+      return <Finish ref="finish"
+        totalScore={this.props.totalScore}
+        maxScore={this.props.maxScore}
+        name={this.props.name}/>
+    } else {
       if(this.props.currentQuestion && this.props.name) {
         return  <Question ref="question"
           currentQuestion={this.props.currentQuestion}
@@ -20,11 +26,6 @@ export class Quiz extends React.PureComponent {
           next={this.props.next}
           setName={this.props.setName}/>
       }
-    } else {
-      return <Finish ref="finish"
-        totalScore={this.props.totalScore}
-        maxScore={this.props.maxScore}
-        name={this.props.name}/>
     }
   }
 }

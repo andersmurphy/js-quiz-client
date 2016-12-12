@@ -47,7 +47,7 @@ describe('Quiz', () => {
           })
         })
       )
-      const currenQuestion = Map({
+      const currentQuestion = Map({
         question: 'question1',
         answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
       })
@@ -56,7 +56,7 @@ describe('Quiz', () => {
       const name = 'john'
       const component = renderIntoDocument(
         <Quiz questions={questions}
-                  currentQuestion={currenQuestion}
+                  currentQuestion={currentQuestion}
                   totalScore={totalScore}
                   maxScore={maxScore}
                   name={name}/>
@@ -66,13 +66,15 @@ describe('Quiz', () => {
       expect(questionComponent).to.be.ok
     })
 
-    it('renders finish component when there are no more questions is empty', () => {
+    it('renders finish component when questions is empty and currenQuestion is empty', () => {
       const questions = Map()
       const totalScore = 25
       const maxScore = 100
       const name = 'john'
+      const currentQuestion = Map()
       const component = renderIntoDocument(
         <Quiz questions={questions}
+                  currentQuestion={currentQuestion}
                   totalScore={totalScore}
                   maxScore={maxScore}
                   name={name}/>
