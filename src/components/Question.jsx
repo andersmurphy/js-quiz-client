@@ -1,6 +1,6 @@
 import React from 'react'
 import {Map, List} from 'immutable'
-import Score from './Score'
+import {Score} from './Score'
 
 export default class Question extends React.PureComponent {
   getAnswers() {

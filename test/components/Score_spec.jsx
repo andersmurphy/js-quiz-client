@@ -1,31 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-  renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
-} from 'react-addons-test-utils'
-import Score from '../../src/components/Score'
+import {shallow, mount} from 'enzyme'
+import {Score} from '../../src/components/Score'
 import {expect} from 'chai'
 
 
 describe('Score', () => {
 
   it('renders score', () => {
-    const totalScore = 25
-    const component = renderIntoDocument(
-      <Score totalScore={totalScore} />
-    )
+    const component = shallow(<Score totalScore={25} />)
+    expect(component.type()).to.equal('div')
+    expect(component.hasClass('score'))
 
-    const headers = scryRenderedDOMComponentsWithTag(component, 'p')
-
-    expect(headers.length).to.equal(1)
-    expect(headers[0].textContent).to.equal('Points so far: 25')
+    const paragraph = component.childAt(0)
+    expect(paragraph.type()).to.equal('p')
+    expect(paragraph.text()).to.equal('Points so far: 25')
   })
 
   it('handles missing props', () => {
-    const component = renderIntoDocument(
-      <Score />
-    )
+    const wrapper = shallow(<Score />)
   })
 
 })
