@@ -1,33 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../action_creators'
-import Start from './Start'
-import Finish from './Finish'
-import Question from './Question'
+import {Start} from './Start'
+import {Finish} from './Finish'
+import {Question} from './Question'
 
-export class Quiz extends React.PureComponent {
-  render() {
-    if(this.props.questions && this.props.questions.isEmpty()
-        &&this.props.currentQuestion && this.props.currentQuestion.isEmpty()) {
-      return <Finish ref="finish"
-        totalScore={this.props.totalScore}
-        maxScore={this.props.maxScore}
-        name={this.props.name}
-        tryAgain={this.props.tryAgain}/>
-    } else if(this.props.currentQuestion && !this.props.currentQuestion.isEmpty()) {
-      return  <Question ref="question"
-        currentQuestion={this.props.currentQuestion}
-        totalScore={this.props.totalScore}
-        next={this.props.next}
-        selectAnswer={this.props.selectAnswer}
-        selectedAnswer={this.props.selectedAnswer}/>
-    } else {
-      return <Start ref="start"
-        next={this.props.next}
-        setName={this.props.setName}
-        name={this.props.name}/>
-    }
-
+export const Quiz = props => {
+  if(props.questions && props.questions.isEmpty()
+      &&props.currentQuestion && props.currentQuestion.isEmpty()) {
+    return <Finish
+      totalScore={props.totalScore}
+      maxScore={props.maxScore}
+      name={props.name}
+      tryAgain={props.tryAgain}/>
+  } else if(props.currentQuestion && !props.currentQuestion.isEmpty()) {
+    return  <Question
+      currentQuestion={props.currentQuestion}
+      totalScore={props.totalScore}
+      next={props.next}
+      selectAnswer={props.selectAnswer}
+      selectedAnswer={props.selectedAnswer}/>
+  } else {
+    return <Start
+      next={props.next}
+      setName={props.setName}
+      name={props.name}/>
   }
 }
 

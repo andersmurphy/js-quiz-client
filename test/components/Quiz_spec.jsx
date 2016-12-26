@@ -1,15 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {
-  renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
-} from 'react-addons-test-utils'
-import {Quiz} from '../../src/components/Quiz'
+import {shallow} from 'enzyme'
 import {expect} from 'chai'
 import {Map, List} from 'immutable'
+import {Quiz} from '../../src/components/Quiz'
+import {Start} from '../../src/components/Start'
+import {Finish} from '../../src/components/Finish'
+import {Question} from '../../src/components/Question'
 
 describe('Quiz', () => {
-
 
     it('renders start component when currentQuestion is empty', () => {
       const questions = List.of(
@@ -24,14 +22,9 @@ describe('Quiz', () => {
           })
         })
       )
-      const component = renderIntoDocument(
-        <Quiz questions={questions}/>
-      )
+      const component = shallow(<Quiz questions={questions}/>)
 
-      const startComponent = ReactDOM.findDOMNode(component.refs.start)
-      expect(startComponent).to.be.ok
-      expect(startComponent.textContent).to.contain('Welcome to the Cash Flow Quiz!')
-      expect(startComponent.textContent).to.contain('What is your name?')
+      expect(component.type()).to.equal(Start)
     })
 
     it('renders question component when currentQuestion is not empty', () => {
@@ -51,45 +44,31 @@ describe('Quiz', () => {
         question: 'question1',
         answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
       })
-      const totalScore = 25
-      const maxScore = 100
-      const component = renderIntoDocument(
+      const component = shallow(
         <Quiz questions={questions}
                   currentQuestion={currentQuestion}
-                  totalScore={totalScore}
-                  maxScore={maxScore}
-                  name={name}/>
+                  totalScore={25}
+                  maxScore={100}
+                  name={'john'}/>
       )
 
-      const questionComponent = ReactDOM.findDOMNode(component.refs.question)
-      expect(questionComponent).to.be.ok
+      expect(component.type()).to.equal(Question)
     })
 
     it('renders finish component when questions is empty and currenQuestion is empty', () => {
-      const questions = Map()
-      const totalScore = 25
-      const maxScore = 100
-      const name = 'john'
-      const currentQuestion = Map()
-      const component = renderIntoDocument(
-        <Quiz questions={questions}
-                  currentQuestion={currentQuestion}
-                  totalScore={totalScore}
-                  maxScore={maxScore}
-                  name={name}/>
+      const component = shallow(
+        <Quiz questions={Map()}
+                  currentQuestion={Map()}
+                  totalScore={25}
+                  maxScore={100}
+                  name={'john'}/>
       )
 
-      const finishComponent = ReactDOM.findDOMNode(component.refs.finish)
-      expect(finishComponent).to.be.ok;
-      expect(finishComponent.textContent).to.contain('john')
-      expect(finishComponent.textContent).to.contain('100')
-      expect(finishComponent.textContent).to.contain('25')
+      expect(component.type()).to.equal(Finish)
     })
 
     it('handles missing props', () => {
-      const component = renderIntoDocument(
-        <Quiz />
-      )
+      const component = shallow(<Quiz />)
     })
 
 })

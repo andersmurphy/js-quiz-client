@@ -1,14 +1,20 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {shallow, mount} from 'enzyme'
-import {Score} from '../../src/components/Score'
+import {shallow} from 'enzyme'
 import {expect} from 'chai'
-
+import {Score} from '../../src/components/Score'
 
 describe('Score', () => {
+  let component
 
-  it('renders score', () => {
-    const component = shallow(<Score totalScore={25} />)
+  beforeEach(() => {
+    component = shallow(<Score totalScore={25} />)
+  })
+
+  it('renders components', () => {
+    expect(component).to.exist
+  })
+
+  it('displays the score in a paragraph wrapped in a div', () => {
     expect(component.type()).to.equal('div')
     expect(component.hasClass('score'))
 
@@ -18,7 +24,7 @@ describe('Score', () => {
   })
 
   it('handles missing props', () => {
-    const wrapper = shallow(<Score />)
+    const component = shallow(<Score />)
   })
 
 })

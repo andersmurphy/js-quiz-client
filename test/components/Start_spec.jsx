@@ -1,67 +1,48 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {
-  renderIntoDocument,
-  scryRenderedDOMComponentsWithTag,
-  Simulate
-} from 'react-addons-test-utils'
-import Start from '../../src/components/Start'
 import {expect} from 'chai'
+import {shallow} from 'enzyme'
+import {Start} from '../../src/components/Start'
 
 describe('Start', () => {
+  let component
+
+  beforeEach(() => {
+    component = shallow(<Start />)
+  })
 
   it('renders quiz title', () => {
-      const component = renderIntoDocument(
-        <Start />
-      )
+      const header = component.childAt(0)
 
-      const headers = scryRenderedDOMComponentsWithTag(component, 'h3')
-
-      expect(headers.length).to.equal(1)
-      expect(headers[0].textContent).to.equal('Welcome to the Cash Flow Quiz!')
+      expect(header.type()).to.equal('h3')
+      expect(header.text()).to.equal('Welcome to the Cash Flow Quiz!')
   })
 
   it('renders what is your name?', () => {
-      const component = renderIntoDocument(
-        <Start />
-      )
+      const paragraph = component.childAt(1)
 
-      const paragraphs = scryRenderedDOMComponentsWithTag(component, 'p')
-
-      expect(paragraphs.length).to.equal(1)
-      expect(paragraphs[0].textContent).to.equal('What is your name?')
+      expect(paragraph.type()).to.equal('p')
+      expect(paragraph.text()).to.equal('What is your name?')
   })
 
   it('renders text field', () => {
-    const component = renderIntoDocument(
-      <Start />
-    )
+    const input = component.childAt(2)
 
-    const input = scryRenderedDOMComponentsWithTag(component, 'input')
-
-    expect(input.length).to.equal(1)
-    expect(input[0].textContent).to.equal('')
+    expect(input.type()).to.equal('input')
+    expect(input.text()).to.equal('')
   })
 
   it('renders next button', () => {
-    const component = renderIntoDocument(
-      <Start />
-    )
+    const button = component.find('button')
 
-    const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
-
-    expect(buttons.length).to.equal(1)
-    expect(buttons[0].textContent).to.equal('Next')
+    expect(button.text()).to.equal('Next')
   })
 
   it('invokes the next callback when next button is clicked', () => {
     let nextInvoked = false
     const next = () => nextInvoked = true
-    const component = renderIntoDocument(
-      <Start next={next}/>
-    )
+    const component = shallow(<Start next={next} name={''}/>)
 
-    Simulate.click(ReactDOM.findDOMNode(component.refs.next))
+    component.find('button').simulate('click')
 
     expect(nextInvoked).to.equal(true)
   })
@@ -69,34 +50,26 @@ describe('Start', () => {
   it('invokes the setName callback when setName input changes', () => {
     let setNameInvoked = false
     const setName = () => setNameInvoked = true
-    const component = renderIntoDocument(
-      <Start setName={setName}/>
-    )
+    const component = shallow(<Start setName={setName} name={''}/>)
 
-    Simulate.change(ReactDOM.findDOMNode(component.refs.setName))
+    component.find('input').simulate('change', { target: {value:'some value'} })
 
     expect(setNameInvoked).to.equal(true)
   })
 
   it('disables next button if name is an empty string', () =>  {
-    const name = ''
-    const component = renderIntoDocument(
-      <Start name={name}/>
-    )
+    const component = shallow(<Start name={''}/>)
 
-    const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
+    const button = component.find('button')
 
-    expect(buttons[0].hasAttribute('disabled')).to.equal(true);
+    expect(button.prop('disabled')).to.equal(true);
   })
 
   it('enables next button if name is not empty string', () =>  {
-    const name = 'Anders'
-    const component = renderIntoDocument(
-      <Start name={name}/>
-    )
+    const component = shallow(<Start name={'Anders'}/>)
 
-    const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
+    const button = component.find('button')
 
-    expect(buttons[0].hasAttribute('disabled')).to.equal(false);
+    expect(button.prop('disabled')).to.equal(false);
   })
 })

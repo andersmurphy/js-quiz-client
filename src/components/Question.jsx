@@ -2,35 +2,30 @@ import React from 'react'
 import {Map, List} from 'immutable'
 import {Score} from './Score'
 
-export default class Question extends React.PureComponent {
-  getAnswers() {
-    return ((this.props.currentQuestion && this.props.currentQuestion.get('answers'))
-            || List())
-            .keySeq()
-  }
 
-  getQuestion() {
-    return ((this.props.currentQuestion && this.props.currentQuestion.get('question'))
-            || '')
-  }
+const getAnswers = props =>
+  ((props.currentQuestion && props.currentQuestion.get('answers'))
+          || List())
+          .keySeq()
 
-  render() {
-    return <div className="question">
-      <Score totalScore={this.props.totalScore}/>
-      <h3>{this.getQuestion()}</h3>
-      {this.getAnswers().map(answer =>
-        <div className="radio" key={answer}>
-          <input type="radio" value={answer}
-            onChange={() => this.props.selectAnswer(answer)}
-            checked={this.props.selectedAnswer === answer ? true : false}/>
-          <label htmlFor={answer}>{answer}</label>
-        </div>
-      )}
-      <button ref="next"
-              className="next"
-              onClick={this.props.next}>
-              Next
-      </button>
-    </div>
-  }
-}
+const getQuestion = props =>
+  ((props.currentQuestion && props.currentQuestion.get('question'))
+          || '')
+
+export const Question = props =>
+  <div className="question">
+    <Score totalScore={props.totalScore}/>
+    <h3>{getQuestion(props)}</h3>
+    {getAnswers(props).map(answer =>
+      <div className="radio" key={answer}>
+        <input type="radio" value={answer}
+          onChange={() => props.selectAnswer(answer)}
+          checked={props.selectedAnswer === answer ? true : false}/>
+        <label htmlFor={answer}>{answer}</label>
+      </div>
+    )}
+    <button className="next"
+            onClick={props.next}>
+            Next
+    </button>
+  </div>

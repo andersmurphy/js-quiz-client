@@ -1,11 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {
-  renderIntoDocument,
-  scryRenderedDOMComponentsWithTag,
-  Simulate
-} from 'react-addons-test-utils'
-import Question from '../../src/components/Question'
+import {shallow} from 'enzyme'
+import {Question} from '../../src/components/Question'
 import {expect} from 'chai'
 import {Map} from 'immutable'
 
@@ -16,14 +11,12 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const component = renderIntoDocument(
-      <Question currentQuestion={currentQuestion}/>
-    )
+    const component = shallow(<Question currentQuestion={currentQuestion}/>)
 
-    const headers = scryRenderedDOMComponentsWithTag(component, 'h3')
+    const headers = component.find('h3')
 
     expect(headers.length).to.equal(1)
-    expect(headers[0].textContent).to.equal('question1')
+    expect(headers.text()).to.equal('question1')
   })
 
   it('renders answers', () => {
@@ -31,17 +24,15 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const component = renderIntoDocument(
-      <Question currentQuestion={currentQuestion}/>
-    )
+    const component = shallow(<Question currentQuestion={currentQuestion}/>)
 
-    const radioButtons = scryRenderedDOMComponentsWithTag(component, 'label')
+    const radioButtons = component.find('label')
 
     expect(radioButtons.length).to.equal(4)
-    expect(radioButtons[0].textContent).to.equal('answerA')
-    expect(radioButtons[1].textContent).to.equal('answerB')
-    expect(radioButtons[2].textContent).to.equal('answerC')
-    expect(radioButtons[3].textContent).to.equal('answerD')
+    expect(radioButtons.at(0).text()).to.equal('answerA')
+    expect(radioButtons.at(1).text()).to.equal('answerB')
+    expect(radioButtons.at(2).text()).to.equal('answerC')
+    expect(radioButtons.at(3).text()).to.equal('answerD')
   })
 
   it('invokes callback when next radio button is selected', () => {
@@ -51,13 +42,11 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const component = renderIntoDocument(
-      <Question currentQuestion={currentQuestion}
-                selectAnswer={selectAnswer}/>
-    )
+    const component = shallow(<Question currentQuestion={currentQuestion}
+                                        selectAnswer={selectAnswer}/>)
 
-    const input = scryRenderedDOMComponentsWithTag(component, 'input')
-    Simulate.change(input[0])
+    const inputs = component.find('input')
+    inputs.at(0).simulate('change', { target: {value:'some value'} })
 
     expect(selectedAnswer).to.equal('answerA')
   })
@@ -67,17 +56,15 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const component = renderIntoDocument(
-      <Question currentQuestion={currentQuestion}
-                selectedAnswer='answerC'/>
-    )
+    const component = shallow(<Question currentQuestion={currentQuestion}
+                                        selectedAnswer='answerC'/>)
 
-    const input = scryRenderedDOMComponentsWithTag(component, 'input')
+    const inputs = component.find('input')
 
-    expect(input[0].checked).to.equal(false)
-    expect(input[1].checked).to.equal(false)
-    expect(input[2].checked).to.equal(true)
-    expect(input[3].checked).to.equal(false)
+    expect(inputs.at(0).prop('checked')).to.equal(false)
+    expect(inputs.at(1).prop('checked')).to.equal(false)
+    expect(inputs.at(2).prop('checked')).to.equal(true)
+    expect(inputs.at(3).prop('checked')).to.equal(false)
   })
 
   it('renders next button', () => {
@@ -85,14 +72,11 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const component = renderIntoDocument(
-      <Question currentQuestion={currentQuestion}/>
-    )
+    const component = shallow(<Question currentQuestion={currentQuestion}/>)
 
-    const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
+    const button = component.find('button')
 
-    expect(buttons.length).to.equal(1)
-    expect(buttons[0].textContent).to.equal('Next')
+    expect(button.text()).to.equal('Next')
   })
 
   it('invokes the next callback when next button is clicked', () => {
@@ -102,19 +86,15 @@ describe('Question', () => {
       question: 'question1',
       answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
     })
-    const component = renderIntoDocument(
-      <Question currentQuestion={currentQuestion}
-                next={next}/>
-    )
+    const component = shallow(<Question currentQuestion={currentQuestion}
+                                        next={next}/>)
 
-    Simulate.click(ReactDOM.findDOMNode(component.refs.next))
+    component.find('button').simulate('click')
 
     expect(nextInvoked).to.equal(true)
   })
 
   it('handles missing props', () => {
-    const component = renderIntoDocument(
-      <Question />
-    )
+    const component = shallow(<Question />)
   })
 })

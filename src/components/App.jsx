@@ -1,7 +1,3 @@
 import React from 'react'
 
-export default class App extends React.PureComponent{
-  render() {
-    return this.props.children
-  }
-}
+export const App = props => props.children
