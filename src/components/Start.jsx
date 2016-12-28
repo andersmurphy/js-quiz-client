@@ -1,9 +1,7 @@
 import React from 'react'
 
 
-const isNextDisabled = props => {
-    return props.name === ''
-}
+const isNextDisabled = props => props.name === ''
 
 export const Start = props =>
   <div className="start">

@@ -4,13 +4,10 @@ import {Score} from './Score'
 
 
 const getAnswers = props =>
-  ((props.currentQuestion && props.currentQuestion.get('answers'))
-          || List())
-          .keySeq()
+  (props.currentQuestion ? props.currentQuestion.get('answers') : List()).keySeq()
 
 const getQuestion = props =>
-  ((props.currentQuestion && props.currentQuestion.get('question'))
-          || '')
+  props.currentQuestion ? props.currentQuestion.get('question') : ''
 
 export const Question = props =>
   <div className="question">
